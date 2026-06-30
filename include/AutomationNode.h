@@ -32,9 +32,8 @@ namespace lmms
 class AutomationClip;
 
 
-// Note: We use the default copy-assignment on the AutomationClip constructor. It's
-// fine for now as we don't have dynamic allocated members, but if any are added we should
-// have an user-defined one to perform a deep-copy.
+// Note: We use the default copy-assignment on the AutomationClip constructor. It's fine for now as we don't have
+// dynamic allocated members, but if any are added we should have an user-defined one to perform a deep-copy.
 class AutomationNode
 {
 public:
@@ -162,16 +161,14 @@ private:
 	float m_inValue;
 	float m_outValue;
 
-	// Slope at each point for calculating spline
-	// We might have discrete jumps between curves, so we possibly have
-	// two different tangents for each side of the curve. If inValue and
-	// outValue are equal, inTangent and outTangent are equal too.
+	// Slope at each point for calculating spline We might have discrete jumps between curves, so we possibly have two
+	// different tangents for each side of the curve. If inValue and outValue are equal, inTangent and outTangent are
+	// equal too.
 	float m_inTangent;
 	float m_outTangent;
 
-	// If the tangents were edited manually, this will be true. That way
-	// the tangents from this node will not be recalculated. It's set back
-	// to false if the tangents are reset.
+	// If the tangents were edited manually, this will be true. That way the tangents from this node
+	// will not be recalculated. It's set back to false if the tangents are reset.
 	bool m_lockedTangents;
 };
 

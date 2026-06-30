@@ -31,38 +31,35 @@ namespace lmms
 {
 
 // Dummy constructor for the QMap
-AutomationNode::AutomationNode() :
-	m_clip(nullptr),
-	m_pos(0),
-	m_inValue(0),
-	m_outValue(0),
-	m_inTangent(0),
-	m_outTangent(0),
-	m_lockedTangents(false)
-{
-}
+AutomationNode::AutomationNode()
+	: m_clip{nullptr}
+	, m_pos{0}
+	, m_inValue{0}
+	, m_outValue{0}
+	, m_inTangent{0}
+	, m_outTangent{0}
+	, m_lockedTangents{false}
+{}
 
-AutomationNode::AutomationNode(AutomationClip* clip, float value, int pos) :
-	m_clip(clip),
-	m_pos(pos),
-	m_inValue(value),
-	m_outValue(value),
-	m_inTangent(0),
-	m_outTangent(0),
-	m_lockedTangents(false)
-{
-}
+AutomationNode::AutomationNode(AutomationClip* clip, float value, int pos)
+	: m_clip{clip}
+	, m_pos{pos}
+	, m_inValue{value}
+	, m_outValue{value}
+	, m_inTangent{0}
+	, m_outTangent{0}
+	, m_lockedTangents{false}
+{}
 
-AutomationNode::AutomationNode(AutomationClip* clip, float inValue, float outValue, int pos) :
-	m_clip(clip),
-	m_pos(pos),
-	m_inValue(inValue),
-	m_outValue(outValue),
-	m_inTangent(0),
-	m_outTangent(0),
-	m_lockedTangents(false)
-{
-}
+AutomationNode::AutomationNode(AutomationClip* clip, float inValue, float outValue, int pos)
+	: m_clip{clip}
+	, m_pos{pos}
+	, m_inValue{inValue}
+	, m_outValue{outValue}
+	, m_inTangent{0}
+	, m_outTangent{0}
+	, m_lockedTangents{false}
+{}
 
 /**
  * @brief Sets the inValue of an automation node
@@ -73,10 +70,10 @@ void AutomationNode::setInValue(float value)
 	m_inValue = value;
 
 	// Recalculate the tangents from neighbor nodes
-	AutomationClip::timeMap & tm = m_clip->getTimeMap();
+	auto& tm = m_clip->getTimeMap();
 
 	// Get an iterator pointing to this node
-	AutomationClip::timeMap::iterator it = tm.lowerBound(m_pos);
+	auto it = tm.lowerBound(m_pos);
 	// If it's not the first node, get the one immediately behind it
 	if (it != tm.begin()) { --it; }
 
@@ -93,10 +90,10 @@ void AutomationNode::setOutValue(float value)
 	m_outValue = value;
 
 	// Recalculate the tangents from neighbor nodes
-	AutomationClip::timeMap & tm = m_clip->getTimeMap();
+	auto& tm = m_clip->getTimeMap();
 
 	// Get an iterator pointing to this node
-	AutomationClip::timeMap::iterator it = tm.lowerBound(m_pos);
+	auto it = tm.lowerBound(m_pos);
 	// If it's not the first node, get the one immediately behind it
 	if (it != tm.begin()) { --it; }
 
@@ -109,8 +106,7 @@ void AutomationNode::setOutValue(float value)
 */
 void AutomationNode::resetOutValue()
 {
-	// Calls setOutValue so it also takes care of generating
-	// the tangents
+	// Calls setOutValue so it also takes care of generating the tangents
 	setOutValue(m_inValue);
 }
 
